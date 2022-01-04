@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{generate}" th:object="${Url}" method="POST">
+        <label>Url</label>
+        <input type="text" id="orignalUrl" name="orignalUrl">
+        <br>
+        <input type="submit" name="submit">
+    </form>
+    <label>Short Link:</label>
+    <p/>
+</body>
+</html>
