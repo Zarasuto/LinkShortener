@@ -2,7 +2,7 @@
 /-create and integrate mysql to the project
 /- generate shortlink functionality
 
-- redirect shortlink functionality
+/- redirect shortlink functionality
 - Create automatic deletion of expired links
 
 /- add login page
