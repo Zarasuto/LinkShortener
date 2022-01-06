@@ -6,6 +6,8 @@ import com.example.linkshortener.Repositories.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class UrlShorteningServiceImpl implements UrlShorteningService{
 
@@ -18,8 +20,8 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             Url urlToPersist = new Url();
             urlToPersist.setShortenedURL(this.encodeUrl());
             urlToPersist.setOriginalUrl(url.getOriginalUrl());
-            urlToPersist.setCreationDate(url.getCreationTime());
-            urlToPersist.setExpirationDate(url.getExpiryTime());
+            urlToPersist.setCreationDate(LocalDateTime.now());
+            urlToPersist.setExpirationDate(setExpiryDate(url.getExpiryHours()));
             Url urlInRep = persistShortLink(urlToPersist);
             if(urlInRep!=null){
                 return urlInRep;
@@ -27,6 +29,10 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             return null;
         }
         return null;
+    }
+
+    private LocalDateTime setExpiryDate(int hours){
+        return LocalDateTime.now().plusHours(hours);
     }
 
     private String encodeUrl() {
@@ -47,6 +53,6 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
 
     @Override
     public void deleteShortLink(Url url) {
-
+        urlRepository.delete(url);
     }
 }

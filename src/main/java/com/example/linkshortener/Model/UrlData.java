@@ -4,30 +4,25 @@ import java.time.LocalDateTime;
 
 public class UrlData {
     private String originalUrl;
-    private LocalDateTime creationTime=LocalDateTime.now();
-    private LocalDateTime expiryTime=LocalDateTime.now().plusWeeks(1);
+    private int expiryHours; //Optional
+
+    public UrlData(){
+        expiryHours=1;
+    }
 
     public String getOriginalUrl() {
         return originalUrl;
+    }
+
+    public int getExpiryHours() {
+        return expiryHours;
     }
 
     public void setOriginalUrl(String originalUrl) {
         this.originalUrl = originalUrl;
     }
 
-    public LocalDateTime getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(LocalDateTime creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public LocalDateTime getExpiryTime() {
-        return expiryTime;
-    }
-
-    public void setExpiryTime(LocalDateTime expiryTime) {
-        this.expiryTime = expiryTime;
+    public void setExpiryHours(int expiryHours) {
+        this.expiryHours = expiryHours;
     }
 }
