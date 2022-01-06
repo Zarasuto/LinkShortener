@@ -1,6 +1,7 @@
 package com.example.linkshortener.Controller;
 
 
+import com.example.linkshortener.Model.Url;
 import com.example.linkshortener.Model.UrlData;
 import com.example.linkshortener.Services.UrlShorteningServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +13,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MVCController {
-
     @Autowired
     private UrlShorteningServiceImpl urlShorteningService;
 
     @GetMapping(value={"/","/generate"})
     public String getForm(Model model){
         model.addAttribute("UrlData", new UrlData());
+        model.addAttribute("Url", new Url());
         return "index";
     }
 
     @PostMapping("/generate")
     public String generateShortlink(@ModelAttribute UrlData url, Model model){
-        model.addAttribute("UrlData",url);
+        if(url!=null){
+            Url urlRep = urlShorteningService.generateShortLink(url);
+            model.addAttribute("Url",urlRep);
+        }
         return "index";
     }
 }

@@ -1,0 +1,11 @@
+/-Create services
+/-create and integrate mysql to the project
+/- generate shortlink functionality
+
+- redirect shortlink functionality
+- Create automatic deletion of expired links
+
+/- add login page
+- create User entity and refactor Url entity to accept user entity
+
+- ask sir on how to make a database that keep tracks of url per user

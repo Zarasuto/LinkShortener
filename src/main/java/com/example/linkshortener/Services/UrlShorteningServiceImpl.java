@@ -19,7 +19,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
         if(!url.getOriginalUrl().isEmpty()){
             Url urlToPersist = new Url();
             urlToPersist.setShortenedURL(this.encodeUrl());
-            urlToPersist.setOriginalUrl(url.getOriginalUrl());
+            urlToPersist.setOriginalUrl(validateAndFixUrl(url));
             urlToPersist.setCreationDate(LocalDateTime.now());
             urlToPersist.setExpirationDate(setExpiryDate(url.getExpiryHours()));
             Url urlInRep = persistShortLink(urlToPersist);
@@ -54,5 +54,14 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
     @Override
     public void deleteShortLink(Url url) {
         urlRepository.delete(url);
+    }
+
+    @Override
+    public String validateAndFixUrl(UrlData url) {
+        if(url.getOriginalUrl().startsWith("http://")||url.getOriginalUrl().startsWith("https://")){
+            return url.getOriginalUrl();
+        }else{
+            return "http://"+url.getOriginalUrl();
+        }
     }
 }

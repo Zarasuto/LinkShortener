@@ -10,4 +10,5 @@ public interface UrlShorteningService {
     public Url getShortenedUrl(String shortenedurl);
     public Url persistShortLink(Url url);
     public void deleteShortLink(Url url);
+    public String validateAndFixUrl(UrlData url);
 }
