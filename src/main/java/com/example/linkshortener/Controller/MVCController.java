@@ -39,8 +39,4 @@ public class MVCController {
         return "index";
     }
 
-    @Scheduled(fixedRate=3600000) // Calls this method every hour
-    public void CheckAndDeleteExpiredLinks(){
-        urlShorteningService.checkAndDeleteExpiredLinks();
-    }
 }
