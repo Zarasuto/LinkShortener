@@ -43,12 +43,12 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
         Integer sampleSize = sampleString.length();
         char[] chars = input.toCharArray();
         Integer charsLen = chars.length;
-        int wholeNo = Math.floorDiv(charsLen , 10);
-        Integer remainder = charsLen - wholeNo * 10;
+        int wholeNo = Math.floorDiv(charsLen , 7);
+        Integer remainder = charsLen - wholeNo * 7;
         char[] shortened = new char[10];
         Integer i,j;
         Integer x = 0;
-        for (i = 0; i <= 9; i++) {
+        for (i = 0; i <= 6; i++) {
             int temp = 0,temp1 = 0;
             for (j = 1; j <= wholeNo; j++) {
                 if(remainder !=0) {
@@ -63,8 +63,9 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             }
             temp1 = Math.floorDiv(temp, sampleSize);
             temp -= temp1 * sampleSize;
-            shortened[i] += sample[ThreadLocalRandom.current().nextInt(0, sampleSize+1)];
+            shortened[i] += sample[i];
         }
+        shortened[i]+=ThreadLocalRandom.current().nextInt(10, 100);
         String str= new String(shortened);
         return(str);
     }
