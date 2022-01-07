@@ -41,11 +41,6 @@ public class MVCController {
 
     @Scheduled(fixedRate=3600000) // Calls this method every hour
     public void CheckAndDeleteExpiredLinks(){
-        List<Url> urlList = urlRepository.findALlExpiredLinks();
-        if(urlList!=null){
-            for(Url url:urlList){
-                urlShorteningService.deleteShortLink(url);
-            }
-        }
+        urlShorteningService.checkAndDeleteExpiredLinks();
     }
 }

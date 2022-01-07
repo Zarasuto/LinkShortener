@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
@@ -90,6 +91,16 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             return url.getOriginalUrl();
         }else{
             return "http://"+url.getOriginalUrl();
+        }
+    }
+
+    @Override
+    public void checkAndDeleteExpiredLinks(){
+        List<Url> urlList = urlRepository.findALlExpiredLinks();
+        if(urlList!=null){
+            for(Url url:urlList){
+                deleteShortLink(url);
+            }
         }
     }
 }
