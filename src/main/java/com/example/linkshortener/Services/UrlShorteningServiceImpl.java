@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class UrlShorteningServiceImpl implements UrlShorteningService{
@@ -61,7 +62,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             }
             temp1 = Math.floorDiv(temp, sampleSize);
             temp -= temp1 * sampleSize;
-            shortened[i] += sample[temp];
+            shortened[i] += sample[ThreadLocalRandom.current().nextInt(0, sampleSize+1)];
         }
         String str= new String(shortened);
         return(str);
