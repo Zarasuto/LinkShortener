@@ -7,6 +7,7 @@ import com.example.linkshortener.Repositories.UrlRepository;
 import com.example.linkshortener.Services.UrlShorteningServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.config.FixedRateTask;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class MVCController {
 
     @GetMapping(value={"/","/generate"})
     public String getForm(Model model){
+        UrlData data = new UrlData();
         model.addAttribute("UrlData", new UrlData());
         model.addAttribute("Url", new Url());
         return "index";
@@ -33,10 +35,15 @@ public class MVCController {
     @PostMapping("/generate")
     public String generateShortlink(@ModelAttribute UrlData url, Model model){
         if(url!=null){
+            url.setUser_id(1);
             Url urlRep = urlShorteningService.generateShortLink(url);
             model.addAttribute("Url",urlRep);
         }
         return "index";
     }
 
+    @Scheduled(fixedRate = 3600000) //Hours
+    public void scheduledTest(){
+        urlShorteningService.checkAndDeleteExpiredLinks();
+    }
 }

@@ -22,6 +22,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             Url urlToPersist = new Url();
             urlToPersist.setShortenedURL(this.encodeUrl(url.getOriginalUrl()));
             urlToPersist.setOriginalUrl(validateAndFixUrl(url));
+            urlToPersist.setUser_id(url.getUser_id());
             urlToPersist.setCreationDate(LocalDateTime.now());
             urlToPersist.setExpirationDate(setExpiryDate(url.getExpiryHours()));
             Url urlInRep = persistShortLink(urlToPersist);
@@ -45,7 +46,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
         Integer charsLen = chars.length;
         int wholeNo = Math.floorDiv(charsLen , 7);
         Integer remainder = charsLen - wholeNo * 7;
-        char[] shortened = new char[10];
+        char[] shortened = new char[7];
         Integer i,j;
         Integer x = 0;
         for (i = 0; i <= 6; i++) {
@@ -63,9 +64,8 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             }
             temp1 = Math.floorDiv(temp, sampleSize);
             temp -= temp1 * sampleSize;
-            shortened[i] += sample[i];
+            shortened[i] += sample[(i*LocalDateTime.now().getSecond())%61];
         }
-        shortened[i]+=ThreadLocalRandom.current().nextInt(10, 100);
         String str= new String(shortened);
         return(str);
     }
@@ -97,7 +97,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
 
     @Override
     public void checkAndDeleteExpiredLinks(){
-        List<Url> urlList = urlRepository.findALlExpiredLinks();
+        List<Url> urlList = urlRepository.findALlExpiredGuestLinks();
         if(urlList!=null){
             for(Url url:urlList){
                 deleteShortLink(url);

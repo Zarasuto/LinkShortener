@@ -14,4 +14,10 @@ public interface UrlRepository extends JpaRepository<Url,Long> {
     @Query(value="SELECT * FROM url WHERE expiration_date < NOW()",
             nativeQuery = true)
     public List<Url> findALlExpiredLinks();
+
+    @Query(value="SELECT * FROM url WHERE expiration_date < NOW() AND user_id = 1",
+            nativeQuery = true)
+    public List<Url> findALlExpiredGuestLinks();
+
+
 }

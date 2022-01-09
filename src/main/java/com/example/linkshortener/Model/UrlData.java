@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class UrlData {
     private String originalUrl;
     private int expiryHours; //Optional
+    private long user_id;
 
     public UrlData(){
         expiryHours=1;
@@ -24,5 +25,13 @@ public class UrlData {
 
     public void setExpiryHours(int expiryHours) {
         this.expiryHours = expiryHours;
+    }
+
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
     }
 }

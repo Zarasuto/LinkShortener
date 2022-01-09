@@ -1,6 +1,7 @@
 package com.example.linkshortener.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -15,6 +16,10 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(targetEntity = Url.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private List<Url> urlList;
 
     public String getPassword() {
         return password;
