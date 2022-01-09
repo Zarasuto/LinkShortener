@@ -1,11 +1,15 @@
 package com.example.linkshortener.Model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -17,20 +21,34 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(targetEntity = Url.class, cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
-    private List<Url> urlList;
+    @Column(name = "enabled")
+    private boolean enabled;
 
-    public String getPassword() {
-        return password;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Authorities> authorities;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return enabled;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public boolean isAccountNonLocked() {
+        return enabled;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return enabled;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void setUsername(String username) {
@@ -44,4 +62,21 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
 }
