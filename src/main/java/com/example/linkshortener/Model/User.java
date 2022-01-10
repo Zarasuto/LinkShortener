@@ -1,5 +1,6 @@
 package com.example.linkshortener.Model;
 
+import com.example.linkshortener.Validators.ValidPassword;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,10 +24,15 @@ public class User implements UserDetails {
     @Column(name = "username")
     private String username;
 
-    @NotNull
-    @Size(min=6)
     @Column(name = "password")
     private String password;
+
+    @NotNull
+    @ValidPassword
+    private String plainpassword;
+
+    @NotNull
+    private String repeatpassword;
 
     @Column(name = "enabled")
     private boolean enabled;
@@ -103,4 +109,19 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public String getRepeatpassword() {
+        return repeatpassword;
+    }
+
+    public void setRepeatpassword(String repeatpassword) {
+        this.repeatpassword = repeatpassword;
+    }
+
+    public String getPlainpassword() {
+        return plainpassword;
+    }
+
+    public void setPlainpassword(String plainpassword) {
+        this.plainpassword = plainpassword;
+    }
 }

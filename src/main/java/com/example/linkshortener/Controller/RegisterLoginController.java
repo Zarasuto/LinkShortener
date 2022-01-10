@@ -3,6 +3,7 @@ package com.example.linkshortener.Controller;
 import com.example.linkshortener.Model.User;
 import com.example.linkshortener.Security.PasswordConfig;
 import com.example.linkshortener.Services.UserServiceImpl;
+import com.example.linkshortener.Validators.PasswordMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import javax.validation.Valid;
 
 @Controller
 public class RegisterLoginController {
+
+    @Autowired
+    private PasswordMatch passwordMatch;
 
     @Autowired
     private PasswordConfig PasswordEncoder;
@@ -39,11 +43,12 @@ public class RegisterLoginController {
 
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs){
+        passwordMatch.validate(user,bindingResult);
         if(bindingResult.hasErrors()){
             return "register";
         }
         model.addAttribute("user",user);
-        user.setPassword(PasswordEncoder.passwordEncoder().encode(user.getPassword()));
+        user.setPassword(PasswordEncoder.passwordEncoder().encode(user.getPlainpassword()));
         userService.saveUserToDatabase(user);
         return "login";
     }

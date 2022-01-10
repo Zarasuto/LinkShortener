@@ -28,8 +28,14 @@
 				</div>
 				<div class="form-group">
 					<div class="">
-						<input type="password" name="password" th:field="*{password}" placeholder="Password" class="form-control" />
-						<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Email Error</span>
+						<input type="password" name="plainpassword" th:field="*{plainpassword}" placeholder="Password" class="form-control" />
+						<span th:if="${#fields.hasErrors('plainpassword')}" th:errors="*{plainpassword}">Email Error</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="password" name="repeatpassword" th:field="*{repeatpassword}" placeholder="Repeat Password" class="form-control" />
+						<span th:if="${#fields.hasErrors('repeatpassword')}" th:errors="*{repeatpassword}">Email Error</span>
 					</div>
 				</div>
 				<div class="form-group">
