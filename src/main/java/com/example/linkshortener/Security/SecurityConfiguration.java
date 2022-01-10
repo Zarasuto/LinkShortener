@@ -1,4 +1,4 @@
-package com.example.linkshortener;
+package com.example.linkshortener.Security;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -17,23 +19,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private DataSource dataSource;
-
-	@Value("${spring.queries.users-query}")
-	private String usersQuery;
-
-	@Value("${spring.queries.roles-query}")
-	private String rolesQuery;
+	private UserDetailServiceImpl userDetailsService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
-				.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
+		auth.userDetailsService(userDetailsService);
 	}
 
 	@Override

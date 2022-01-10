@@ -4,6 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,14 +18,27 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @NotNull
+    @Size(min=3, max=30)
     @Column(name = "username")
     private String username;
 
+    @NotNull
+    @Size(min=6)
     @Column(name = "password")
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled;
+
+    @NotNull
+    @Email
+    @Column(name = "email")
+    private String email;
+
+    public User(){
+        enabled=true;
+    }
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Authorities> authorities;
@@ -77,6 +93,14 @@ public class User implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
