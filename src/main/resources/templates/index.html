@@ -5,10 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-    <form th:action="@{generate}" th:object="${UrlData}" method="POST">
+    <form action="#" th:action="@{/generate}" th:object="${urlData}" method="POST">
         <label>Url MUST be valid!</label><br>
         <label>Url</label>
-        <input type="text" id="originalUrl" name="originalUrl" pattern="\S*\.\S*">
+        <input id="originalUrl" name="originalUrl" type="text">
+        <span th:if="${#fields.hasErrors('originalUrl')}" th:errors="${urlData.originalUrl}"></span>
+        <br>
         <label>Expiry:</label>
         <input type="number" id="expiryHours" name="expiryHours" min="1" value="1">
         <label> Hours</label>
@@ -16,6 +18,6 @@
         <input type="submit" name="submit">
     </form>
     <label>Short Link:</label>
-    <p th:text="${Url.getShortenedURL()}"/>
+    <p th:text="${Url?.getShortenedURL()}"/>
 </body>
 </html>
