@@ -1,0 +1,149 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    font-size: 100%;
+    min-height: 100vh;
+    font-family: "Lato", sans-serif;
+    line-height: 1.5;
+    color: white;
+
+}
+
+/*colorshaful on box*/
+div{
+  width: 720px;
+  box-shadow: 0 10px 20px rgba(17, 17, 17, 0.125),
+    0 5px 5px rgba(17, 17, 17, 0.25);
+  background-image: linear-gradient(to top, #00608b 0%, #15b7ff 100%);
+}
+
+
+div, section, span, ul, li, a, header{
+    box-sizing: border-box;
+}
+
+/*css reset*/
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+}
+
+#menu li{
+    list-style: none;
+    display: inline-block;
+    margin: 20px;
+}
+
+#menu li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/*middle box*/
+.container{
+    border: 10px solid gray;
+    max-width: 900px;
+    margin: auto;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0; 
+}
+
+
+section{
+    width: 100%;
+    float: left;
+    height: 100vh;
+    position: relative;
+}
+
+
+#home{
+   background-color: #108ac0;
+}
+
+
+
+.title{
+color: #fff;
+}
+
+
+input,
+button {
+  font-family: inherit;
+  line-height: inherit;
+  color: inherit;
+  border: 0;
+  padding: 1rem;
+}
+
+section[type="coloring"]{
+background-color: #108ac0;
+}
+
+input[type="text"]
+{
+background:white;
+width: 500px;
+height:50px;
+font-size: 20px;
+}
+
+input{
+color: black;
+}
+
+.sub{
+color: black;
+}
+
+input[type="submit"]
+{
+  position: relative;
+  border-radius: 0 25px 25px 0;
+  width: 150px;
+  height: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #ffc107;
+  color: #fff;
+  
+}
+
+input[type="number"]{
+width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
