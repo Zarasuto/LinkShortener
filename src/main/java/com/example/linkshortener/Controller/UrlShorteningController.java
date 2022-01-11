@@ -3,8 +3,7 @@ package com.example.linkshortener.Controller;
 
 import com.example.linkshortener.Model.Url;
 import com.example.linkshortener.Model.UrlData;
-import com.example.linkshortener.Model.User;
-import com.example.linkshortener.Repositories.UrlRepository;
+import com.example.linkshortener.Security.CurrentAuthenticated;
 import com.example.linkshortener.Services.UrlShorteningServiceImpl;
 import com.example.linkshortener.Services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +20,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 public class UrlShorteningController {
+
+    @Autowired
+    private CurrentAuthenticated currentAuthenticated;
+
     @Autowired
     private UrlShorteningServiceImpl urlShorteningService;
 
-    @Autowired
-    private UserServiceImpl userService;
 
     @GetMapping(value={"/","/generate"})
     public String getForm(Model model){
@@ -39,11 +39,16 @@ public class UrlShorteningController {
 
     @PostMapping("/generate")
     public String generateShortlink(@Valid @ModelAttribute UrlData url, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs){
+        //Checks If there is any validation errors
         if(bindingResult.hasErrors()){
-            System.out.println(bindingResult.getAllErrors());
             return "index";
         }
-        url.setUser_id(1);
+        //Checks if the user is either logged in or not. if yes, add a url based on that user
+        if(currentAuthenticated.getAuthentication()==null){
+            url.setUser_id(1);
+        }else{
+            url.setUser_id(currentAuthenticated.getUserDetails().getId());
+        }
         model.addAttribute("urlData",url);
         Url urlRep = urlShorteningService.generateShortLink(url);
         model.addAttribute("Url",urlRep);
@@ -54,6 +59,7 @@ public class UrlShorteningController {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
+    //Cleans the database every hour for expired guest links
     @Scheduled(fixedRate = 3600000) //Hours
     public void scheduledTest(){
         urlShorteningService.checkAndDeleteExpiredLinks();
