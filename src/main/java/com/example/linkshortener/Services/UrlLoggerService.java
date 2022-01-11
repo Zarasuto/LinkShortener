@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UrlLoggerService {
-    public void recordRedirectRequest();
+    public void recordRedirectRequest(Long url_id, Long user_id);
 }

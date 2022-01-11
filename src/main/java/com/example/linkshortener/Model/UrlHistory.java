@@ -1,15 +1,13 @@
 package com.example.linkshortener.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="urlhistory")
 public class UrlHistory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -21,6 +19,16 @@ public class UrlHistory {
 
     @Column(name = "usage_date")
     private LocalDateTime usageDate;
+
+    public UrlHistory(Long url_id, Long user_id, LocalDateTime usageDate){
+        this.url_id=url_id;
+        this.user_id=user_id;
+        this.usageDate=usageDate;
+    }
+
+    public UrlHistory() {
+
+    }
 
     public LocalDateTime getUsageDate() {
         return usageDate;
