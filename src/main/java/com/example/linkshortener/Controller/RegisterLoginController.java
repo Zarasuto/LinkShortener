@@ -1,6 +1,7 @@
 package com.example.linkshortener.Controller;
 
 import com.example.linkshortener.Model.User;
+import com.example.linkshortener.Security.CurrentAuthenticated;
 import com.example.linkshortener.Security.PasswordConfig;
 import com.example.linkshortener.Services.UserServiceImpl;
 import com.example.linkshortener.Validators.PasswordMatch;
@@ -20,6 +21,8 @@ import javax.validation.Valid;
 
 @Controller
 public class RegisterLoginController {
+    @Autowired
+    private CurrentAuthenticated currentAuthenticated;
 
     @Autowired
     private PasswordMatch passwordMatch;
@@ -32,7 +35,10 @@ public class RegisterLoginController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        if(currentAuthenticated.getAuthentication()==null){
+            return "login";
+        }
+        return "index";
     }
 
     @GetMapping("/register")
