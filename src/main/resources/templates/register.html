@@ -43,7 +43,11 @@
 						<button type="submit" class="btn btn-primary btn-block">Register User</button>
 					</div>
 				</div>
-
+				<div class="alert alert-success alert-dismissible col-sm-12"
+					 th:if="${SuccessMessage!=null}">
+					<span>Registration Success!</span>
+					<a href="/login">Go to login</a>
+				</div>
 			</form>
 		</div>
 	</div>

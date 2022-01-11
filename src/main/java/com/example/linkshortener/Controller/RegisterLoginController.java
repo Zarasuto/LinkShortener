@@ -48,17 +48,17 @@ public class RegisterLoginController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs){
+    public String register(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs) throws InterruptedException {
         passwordMatch.validate(user,bindingResult);
         if(bindingResult.hasErrors()){
             return "register";
         }
         model.addAttribute("user",user);
+        model.addAttribute("SuccessMessage","Registration Complete!");
         user.setPassword(PasswordEncoder.passwordEncoder().encode(user.getPlainpassword()));
-        user.setPlainpassword("");
-        user.setRepeatpassword("");
         userService.saveUserToDatabase(user);
-        return "login";
+        Thread.sleep(1000);
+        return "register";
     }
 
     @InitBinder    /* Converts empty strings into null when a form is submitted */

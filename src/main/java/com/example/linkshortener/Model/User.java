@@ -28,9 +28,11 @@ public class User implements UserDetails {
     private String password;
 
     @NotNull
+    @Transient
     @ValidPassword
     private String plainpassword;
 
+    @Transient
     @NotNull
     private String repeatpassword;
 
