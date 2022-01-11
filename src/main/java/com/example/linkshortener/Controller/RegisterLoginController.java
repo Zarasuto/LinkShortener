@@ -49,6 +49,8 @@ public class RegisterLoginController {
         }
         model.addAttribute("user",user);
         user.setPassword(PasswordEncoder.passwordEncoder().encode(user.getPlainpassword()));
+        user.setPlainpassword("");
+        user.setRepeatpassword("");
         userService.saveUserToDatabase(user);
         return "login";
     }
