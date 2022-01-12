@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0984e3;
+            overflow: scroll;
+
+        }
+
+
+
+        /* Dropdown Menu */ /* Dropdown Menu */  /* Dropdown Menu */  /* Dropdown Menu */  /* Dropdown Menu */  /* Dropdown Menu */
+        .dropdown-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+
+        }
+
+        .dropdown-item .imgBox {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 1300px;
+            top: 50px;
+
+        }
+
+        .dropdown-item .imgBox img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,.3);
+            cursor: pointer;
+
+        }
+
+        .dropdown-item .dropdown-content {
+            background: #FFF;
+            padding: 20px 30px;
+            border-radius: 10px;
+            position: absolute;
+            left: 1225px;
+            top: 140px;
+            box-shadow: 0 5px 5px rgba(0,0,0,.3);
+            transform: translateY(50px);
+            opacity: 0;
+            visibility: hidden;
+            margin-left: 20px;
+            transition: .3s;
+
+        }
+
+        .dropdown-item .dropdown-content::before {
+            content: "";
+            position: absolute;
+            left: 90px;
+            top: 0%;
+            background: #FFF;
+            width: 12px;
+            height: 12px;
+            transform: translateY(-50%) rotate(45deg);
+
+        }
+
+        .dropdown-item .dropdown-content .content .name {
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .dropdown-item .dropdown-content .content .occupation {
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            color: #111;
+        }
+
+        .dropdown-item .dropdown-content .links li {
+            list-style: none;
+            line-height: 30px;
+        }
+
+        .dropdown-item .dropdown-content .links li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-item .dropdown-content .links li a i {
+            display: inline-block;
+            width: 20px;
+            margin-right: 5px;
+        }
+
+        .dropdown-item .divider {
+            margin: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+        }
+
+        .dropdown-item .dropdown-toggle {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* HEADER TITLE */ /* HEADER TITLE */ /* HEADER TITLE */ /* HEADER TITLE */ /* HEADER TITLE */ /* HEADER TITLE */
+        .header{
+            font-family:  Copperplate, Fantasy;
+            font-size: 130px;
+            color: #ffff;
+            position:absolute;
+            left:100px;
+            top:30px;
+
+
+
+        }
+
+        /* BUTTON CHART */ /* BUTTON CHART */  /* BUTTON CHART */  /* BUTTON CHART */  /* BUTTON CHART */
+        .pushable {
+            background: rgb(53, 66, 241);
+            border-radius: 12px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+            position:absolute;
+            left:1050px;
+            top: 70px;
+        }
+        .front {
+            display: block;
+            padding: 12px 42px;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            background: rgb(0, 139, 231);
+            color: rgb(255, 255, 255);
+            transform: translateY(-6px);
+        }
+
+        .pushable:active .front {
+            transform: translateY(-2px);
+        }
+
+    </style>
+
+
+
+</head>
+
+    <!-- HEADER TITLE --> <!-- HEADER TITLE --> <!-- HEADER TITLE --> <!-- HEADER TITLE --> <!-- HEADER TITLE -->
+    <div class="header">
+        <h1>CHART</h1>
+    </div>
+
+
+    <!-- USER DROPDOWN MENU --> <!-- USER DROPDOWN MENU --> <!-- USER DROPDOWN MENU --> <!-- USER DROPDOWN MENU -->
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>Chart</title>
+
+</head>
+<body>
+<div class="dropdown-item">
+    <div class="imgBox" onclick="myFunction()">
+        <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="User">
+    </div>
+    <div class="dropdown-content">
+        <div class="content">
+            <div class="name">User</div>
+            <div class="occupation">Jayalle Pangilinan</div>
+        </div>
+        <ul class="links">
+            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li>
+            <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a></li>
+            <div class="divider"></div>
+            <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+        </ul>
+    </div>
+
+
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    </head>
+
+    <!-- BUTTON CHART CONTENT --> <!-- BUTTON CHART CONTENT --> <!-- BUTTON CHART CONTENT --> <!-- BUTTON CHART CONTENT -->
+    <a href='file:///C:/Users/msi/Desktop/Shortener.html'>
+        <button class="pushable">
+            <span class="front" style="font-weight: bold;">GO TO HISTORY</span>
+        </button>
+    </a>
+
+        <!-- RESPONSIVE CHART CONTENT --> <!-- RESPONSIVE CHART CONTENT --> <!-- RESPONSIVE CHART CONTENT --> <!-- RESPONSIVE CHART CONTENT -->
+        <canvas id="bar-chart" width=1300" height="300"
+                style= "position:relative; left:-20px; top:90px; ">
+        </canvas>
+</div>
+
+
+
+
+<!-- CHART SCRIPT --> <!-- CHART SCRIPT -->  <!-- CHART SCRIPT -->  <!-- CHART SCRIPT -->  <!-- CHART SCRIPT -->  <!-- CHART SCRIPT -->
+<script>
+
+    new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+            labels: ["January", "February", "March", "April", "May"],
+            datasets: [
+                {
+                    label: "Total Clicks",
+                    backgroundColor: ["white", "skyblue","white","skyblue","white"],
+                    data: [1,5,10,15,20]
+                }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: ''
+            },
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+
+                }]
+            }
+
+        }
+
+    });  </script>
+
+
+<!-- DROPDOWN SCRIPT --> <!-- DROPDOWN SCRIPT -->  <!-- DROPDOWN SCRIPT --> <!-- DROPDOWN SCRIPT --> <!-- DROPDOWN SCRIPT -->
+<script>
+    function myFunction() {
+        var dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.classList.toggle('dropdown-toggle');
+    }
+</script>
+
+</body>
+</html>

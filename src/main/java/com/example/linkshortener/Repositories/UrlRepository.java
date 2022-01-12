@@ -19,5 +19,5 @@ public interface UrlRepository extends JpaRepository<Url,Long> {
             nativeQuery = true)
     public List<Url> findALlExpiredGuestLinks();
 
-
+    public List<Url> findAllByUserid(Long user_id);
 }

@@ -1,147 +1,515 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org
+  http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout
+  http://www.thymeleaf.org/thymeleaf-extras-springsecurity5 http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0984e3;
+            overflow: scroll;
+
+
+        }
+
+
+
+        /* Dropdown Menu (Style) */  /* Dropdown Menu (Style) */  /* Dropdown Menu (Style) */  /* Dropdown Menu (Style) */
+        .dropdown-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+
+
+        }
+
+
+
+        .dropdown-item .imgBox {
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 1300px;
+            top: 50px;
+
+        }
+
+        .dropdown-item .imgBox img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,.3);
+            cursor: pointer;
+
+        }
+
+        .dropdown-item .dropdown-content {
+            background: #FFF;
+            padding: 20px 30px;
+            border-radius: 10px;
+            position: absolute;
+            left: 1225px;
+            top: 135px;
+            box-shadow: 0 5px 5px rgba(0,0,0,.3);
+            transform: translateY(50px);
+            opacity: 0;
+            visibility: hidden;
+            margin-left: 20px;
+            transition: .3s;
+
+        }
+
+        .dropdown-item .dropdown-content::before {
+            content: "";
+            position: absolute;
+            left: 90px;
+            top: 0%;
+            background: #FFF;
+            width: 12px;
+            height: 12px;
+            transform: translateY(-50%) rotate(45deg);
+
+        }
+
+        .dropdown-item .dropdown-content .content .name {
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .dropdown-item .dropdown-content .content .occupation {
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            color: #111;
+        }
+
+        .dropdown-item .dropdown-content .links li {
+            list-style: none;
+            line-height: 30px;
+        }
+
+        .dropdown-item .dropdown-content .links li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-item .dropdown-content .links li a i {
+            display: inline-block;
+            width: 20px;
+            margin-right: 5px;
+        }
+
+        .dropdown-item .divider {
+            margin: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,.1);
+        }
+
+        .dropdown-item .dropdown-toggle {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+
+
+        /* Table with scrollbar (Style) */  /* Table with scrollbar (Style) */  /* Table with scrollbar (Style) */  /* Table with scrollbar (Style) */
+        .table-container {
+            height: 10em;
+
+
+        }
+        table {
+            display: flex;
+            flex-flow: column;
+            height: 60%;
+            width: 50%;
+            position:absolute;
+            left: 60px;
+            top:200px;
+
+        }
+        table thead {
+
+            flex: 0 0 auto;
+            width: calc(100% - 0.9em);
+
+        }
+        table tbody {
+            flex: 1 1 auto;
+            display: block;
+            width: fit-content;
+            overflow-y: scroll;
+            background-color: white;
+
+        }
+        table tbody tr {
+            width: 100%;
+
+        }
+        table thead,
+        table tbody tr {
+            display: table;
+            table-layout: fixed;
+
+        }
+        table {
+            border: 5px solid white;
+
+        }
+        table td, table th {
+            padding: 0.5em;
+            border: 1px solid lightblue;
+
+        }
+        table th {
+            border: 0px solid grey;
+
+        }
+        table tbody tr:hover {
+            background: gray;
+        }
+        td a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        td
+        {
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        /* Radial Progress Bar (Style) */   /* Radial Progress Bar (Style) */   /* Radial Progress Bar (Style) */   /* Radial Progress Bar (Style) */
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+
+        }
+        .wrapper{
+            width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+        .wrapper .card .circle{
+            position: relative;
+            height: 150px;
+            width: 150px;
+            left:700px;
+            bottom: -100px;
+            border-radius: 200%;
+            cursor: default;
+        }
+        .card .circle .box,
+        .card .circle .box span{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        .card .circle .box span,
+        .wrapper .card .text{
+            background: -webkit-linear-gradient(#ffff,  #ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+        }
+        .circle .box span{
+            font-size: 38px;
+            font-family: sans-serif;
+            font-weight: 600;
+            transform: translate(-300%, -50%);
+            transition: all 0.1s;
+
+
+        }
+        .card .circle:hover .box span{
+            transform: translate(-300%, -50%) scale(1.6);
+        }
+        .card .text{
+            font-size:60px;
+            font-weight: 800;
+            position: relative;
+            left: 600px;
+            bottom: 220px;
+            z-index: -1;
+
+
+        }
+        @media(max-width: 753px){
+            .wrapper{
+                max-width: 1000px;
+            }
+            .wrapper .card{
+                width: calc(50% - 20px);
+            }
+
+
+            *, ::before, ::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+
+
+        }
+        /* Copy clipboard (Style) */   /* Copy clipboard (Style) */   /* Copy clipboard (Style) */   /* Copy clipboard (Style) */
+        .box {
+            width: 400px;
+            line-height: 2.5;
+            font-size: 18px;
+            position: fixed;
+            top: 600px;
+            right: 200px;
+            background: #ffff;
+            color: Black;
+
+        }
+        .btn-copy {
+            position: fixed;
+            top: 598px;
+            right: 140px;
+            width: 60px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: yellow;
+        }
+        .btn-copy img {
+            width: 40px;
+            height: 40px;
+            position: absolute
+        }
+
+
+        /* BUTTON HISTORY (Style) */ /* BUTTON HISTORY (Style) */ /* BUTTON HISTORY (Style) */ /* BUTTON HISTORY (Style) */
+        .pushable {
+            background: rgb(53, 66, 241);
+            border-radius: 12px;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+            position:absolute;
+            left:1000px;
+            top: 70px;
+        }
+        .front {
+            display: block;
+            padding: 12px 42px;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            background: rgb(0, 139, 231);
+            color: rgb(255, 255, 255);
+            transform: translateY(-6px);
+        }
+
+        .pushable:active .front {
+            transform: translateY(-2px);
+        }
+
+
+        /* HEADER TITLE (Style) */ /* HEADER TITLE (Style) */ /* HEADER TITLE (Style) */ /* HEADER TITLE (Style) */ /* HEADER TITLE (Style) */
+        .header{
+            font-family:  Copperplate, Fantasy;
+            font-size: 60px;
+            color: #ffff;
+            position:absolute;
+            left:60px;
+            top:30px;
+
+        }
+    </style>
+
+
+
+    <!-- User Dropdown Menu -->  <!-- User Dropdown Menu -->  <!-- User Dropdown Menu -->  <!-- User Dropdown Menu -->  <!-- User Dropdown Menu -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" type="text/css" href="/css/style_home.css">
 
-    <title>S</title>
+    <title>History</title>
 </head>
-
 <body>
-<div class="dropdown-item">
-    <div class="imgBox" onclick="myFunction()">
-        <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="User">
-    </div>
-    <div class="dropdown-content">
-        <div class="content">
-            <div class="name">User</div>
-            <div class="occupation">Jayalle Pangilinan</div>
+    <div class="dropdown-item">
+        <div class="imgBox" onclick="myFunction()">
+            <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="User">
         </div>
-        <ul class="links">
-            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li>
-            <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a></li>
-            <div class="divider"></div>
-            <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i> Settings</a></li>
-            <li><a href="#"><i class="fa fa-question" aria-hidden="true"></i> Help</a></li>
-            <div class="divider"></div>
-            <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
-        </ul>
-    </div>
-</div>
-
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content=
-        "width=device-width, initial-scale=1.0">
-
-
-<div class="container">
-    <!-- Creating a ui-widgets classes that
-      store other useful classes like
-      ui-values and ui-labels -->
-    <div class="ui-widgets">
-        <div class="ui-labels">Total Clicks</div>
+        <div class="dropdown-content">
+            <div class="content">
+                <div class="name" sec:authentication="principal.username"></div>
+            </div>
+            <ul class="links">
+                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li>
+                <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a></li>
+                <div class="divider"></div>
+                <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+            </ul>
+        </div>
     </div>
 
-    <div class="ui-widgets">
-        <div class="ui-labels">Total Views</div>
+
+
+
+    <!-- Scrollbar Table -->  <!-- Scrollbar Table -->  <!-- Scrollbar Table -->  <!-- Scrollbar Table -->  <!-- Scrollbar Table -->
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr style="color:white">
+                <th>ORIGIN LINK</th>
+                <th>CREATED</th>
+                <th>EXPIRY</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="url: ${urls}" >
+                <td><a th:href="@{/user/home/{shortlink}(shortlink=${url.getShortenedURL()})}" th:text="${url.getOriginalUrl()}"></a></td>
+                <td><a th:href="@{/user/home/{shortlink}(shortlink=${url.getShortenedURL()})}" th:text="${Timeformat.format(url.getCreationDate())}"></a></td>
+                <td><a th:href="@{/user/home/{shortlink}(shortlink=${url.getShortenedURL()})}" th:text="${Timeformat.format(url.getExpirationDate())}"></a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
 
 
-<table style="display:block;text-decoration: none">
-    <tr>
-        <th>Origin Link</th>
-        <th>Shortened</th>
-        <th>Expiry</th>
-        <th>Custom</th>
-        <th>Expand</th>
-    </tr>
-    <tr>
-        <td><a href="/">Back to home</a></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
 
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
+    <!-- HISTORY BUTTON CONTENT --> <!-- HISTORY BUTTON CONTENT --> <!-- HISTORY BUTTON CONTENT --> <!-- HISTORY BUTTON CONTENT -->
+        <a href='ile:///C:/Users/msi/Desktop/chart.htmlf'></a>
+        <button  class="pushable">
+            <span  class="front" style="font-weight: bold;">GO TO CHART</span>
+        </button>
 
-<div class="short_link" data-api-key="https://www.youtube.com/watch" title="Click to copy Shortened Link" onclick="copyToClipboard(this)">https://www.youtube.com/watch?</div>
+    <div class="header">
+        <h1>HISTORY</h1>
+    </div>
 
-<script>
-    function myFunction() {
-        var dropdownContent = document.querySelector('.dropdown-content');
-        dropdownContent.classList.toggle('dropdown-toggle');
-    }
-</script>
-<script>
-    const copyToClipboardX = str => {
-        const el = document.createElement('textarea');
-        el.value = str;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-    };
 
-    function copyToClipboard(e) {
-        var short_link = e.getAttribute("data-short-link")
 
-        if(typeof short_link != "undefined")
-        {
-            copyToClipboardX(short_link);
+    <head>
 
-            UIkit.notification({
-                message: '<span>Link copied.</span>',
-                status: 'success',
-                pos: 'top-left',
-                timeout: 2000
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    </head>
+
+
+    <div class="box">
+        <p th:text="'localhost:8080/'+${urlDta?.getShortenedURL()}"></p>
+        <button class="btn-copy">
+            Copy
+        </button>
+    </div>
+
+
+
+
+
+
+    <!-- RADIAL PROGRESS BAR CONTENT --> <!-- RADIAL PROGRESS BAR CONTENT --> <!-- RADIAL PROGRESS BAR CONTENT --><!-- RADIAL PROGRESS BAR CONTENT -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+    </body>
+    <body>
+    <div class="wrapper">
+        <div class="card">
+            <div class="circle">
+                <div class="bar"></div>
+                <div class="box"><span></span></div>
+            </div>
+            <div class="text">Total Clicks</div>
+        </div>
+    </div>
+
+
+
+        <!-- RADIAL PROGRESS BAR SCRIPT --><!-- RADIAL PROGRESS BAR SCRIPT --> <!-- RADIAL PROGRESS BAR SCRIPT --><!-- RADIAL PROGRESS BAR SCRIPT -->
+        <script>
+            let options = {
+                startAngle: -1.55,
+                size: 150,
+                value: 0.85,
+                fill: {gradient: ['#ffff', '#ffff']}
+            }
+            $(".circle .bar").circleProgress(options).on('circle-animation-progress',
+                function(event, progress, stepValue){
+                    $(this).parent().find("span").text(String(stepValue.toFixed(2).substr(2)) + "%");
+                });
+            $(".js .bar").circleProgress({
+                value: 0.70
             });
-        }
-    }
-</script>
+            $(".react .bar").circleProgress({
+                value: 0.60
+            });
+        </script>
 
 
-</body>
+
+
+
+        <!-- USER DROPDOWN SCRIPT -->
+        <script>
+            function myFunction() {
+                var dropdownContent = document.querySelector('.dropdown-content');
+                dropdownContent.classList.toggle('dropdown-toggle');
+            }
+        </script>
+
+
+
+
+        <!-- COPY TO CLIPBOARD SCRIPT --> <!-- COPY TO CLIPBOARD SCRIPT --> <!-- COPY TO CLIPBOARD SCRIPT --> <!-- COPY TO CLIPBOARD SCRIPT -->
+        <script>
+
+            const btnCopy = document.querySelector('.btn-copy')
+            const txtCopy = document.querySelector('.box p');
+
+            const txt = "Hello World"
+
+            btnCopy.addEventListener('click', () => {
+                navigator.clipboard.writeText(txtCopy.textContent)
+            })
+
+        </script>
+
+    </body>
 </html>

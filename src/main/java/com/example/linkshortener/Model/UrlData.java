@@ -9,6 +9,7 @@ public class UrlData {
     @Pattern(regexp = "\\S*\\.\\S*", message="Must be a valid URL")
     private String originalUrl;
     private int expiryHours; //Optional
+    private String scope;
     private long user_id;
 
     public UrlData(){
@@ -37,5 +38,13 @@ public class UrlData {
 
     public void setUser_id(long user_id) {
         this.user_id = user_id;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 }
