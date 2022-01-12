@@ -38,7 +38,7 @@ public class RegisterLoginController {
         if(currentAuthenticated.getAuthentication()==null){
             return "login";
         }
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/register")
@@ -66,8 +66,4 @@ public class RegisterLoginController {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
 }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/style_home.css">
+
+    <title>S</title>
+</head>
+
+<body>
+<div class="dropdown-item">
+    <div class="imgBox" onclick="myFunction()">
+        <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="User">
+    </div>
+    <div class="dropdown-content">
+        <div class="content">
+            <div class="name">User</div>
+            <div class="occupation">Jayalle Pangilinan</div>
+        </div>
+        <ul class="links">
+            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li>
+            <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a></li>
+            <div class="divider"></div>
+            <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i> Settings</a></li>
+            <li><a href="#"><i class="fa fa-question" aria-hidden="true"></i> Help</a></li>
+            <div class="divider"></div>
+            <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content=
+        "width=device-width, initial-scale=1.0">
+
+
+<div class="container">
+    <!-- Creating a ui-widgets classes that
+      store other useful classes like
+      ui-values and ui-labels -->
+    <div class="ui-widgets">
+        <div class="ui-labels">Total Clicks</div>
+    </div>
+
+    <div class="ui-widgets">
+        <div class="ui-labels">Total Views</div>
+    </div>
+</div>
+
+
+<table style="display:block;text-decoration: none">
+    <tr>
+        <th>Origin Link</th>
+        <th>Shortened</th>
+        <th>Expiry</th>
+        <th>Custom</th>
+        <th>Expand</th>
+    </tr>
+    <tr>
+        <td><a href="/">Back to home</a></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<div class="short_link" data-api-key="https://www.youtube.com/watch" title="Click to copy Shortened Link" onclick="copyToClipboard(this)">https://www.youtube.com/watch?</div>
+
+<script>
+    function myFunction() {
+        var dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.classList.toggle('dropdown-toggle');
+    }
+</script>
+<script>
+    const copyToClipboardX = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    };
+
+    function copyToClipboard(e) {
+        var short_link = e.getAttribute("data-short-link")
+
+        if(typeof short_link != "undefined")
+        {
+            copyToClipboardX(short_link);
+
+            UIkit.notification({
+                message: '<span>Link copied.</span>',
+                status: 'success',
+                pos: 'top-left',
+                timeout: 2000
+            });
+        }
+    }
+</script>
+
+
+</body>
+</html>

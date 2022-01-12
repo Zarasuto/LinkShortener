@@ -1,5 +1,10 @@
-<html>
-
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org
+  http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout
+  http://www.thymeleaf.org/thymeleaf-extras-springsecurity5 http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Shortener Website</title>
@@ -13,7 +18,10 @@
         <a href="#"><img th:src="@{/images/shortlink.png}" width="200px"alt="">
         </a>
         <ul id="menu">
-            <li><a href="login">Sign up</a></li>
+                <li sec:authorize="isAnonymous()"><a href="login">Login</a></li>
+                <li sec:authorize="isAnonymous()"><a href="register">Sign up</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="user/home"><span sec:authentication="principal.username"></span></a></li>
+                <li sec:authorize="isAuthenticated()"><a href="logout">Logout</a></li>
         </ul>
     </header>
 </section>
