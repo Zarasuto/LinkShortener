@@ -19,7 +19,7 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
+    @NotNull(message="Username Must not be empty")
     @Size(min=3, max=30)
     @Column(name = "username")
     private String username;
@@ -27,19 +27,19 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @NotNull
+    @NotNull(message="Password Must not be empty")
     @Transient
     @ValidPassword
     private String plainpassword;
 
     @Transient
-    @NotNull
+    @NotNull(message="Password Must not be empty")
     private String repeatpassword;
 
     @Column(name = "enabled")
     private boolean enabled;
 
-    @NotNull
+    @NotNull(message="Email Must not be empty")
     @Email
     @Column(name = "email")
     private String email;

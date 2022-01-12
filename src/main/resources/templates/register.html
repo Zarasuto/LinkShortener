@@ -1,55 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Registration Form</title>
-<!-- link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Registration Form</title>
+	<!-- link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /-->
+	<link rel="stylesheet" href="/css/styleregister.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #ededed;">
-	<div style="background-color: #337ab7; height: 50px;"></div>
-	<div class="container-fluid" style="margin-top: 30px;">
 
-		<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
-			<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" class="form-signin" role="form">
-				<h3 class="form-signin-heading">Registration Form</h3>
+
+<section>
+	<header class="pic">
+		<a href="/"><img th:src="@{/images/shortlink.png}" width="200px"alt="">
+		</a>
+	</header>
+</section>
+
+<body style="background-color: #108ac0">
+<div class="container-fluid">
+	<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-image: linear-gradient(to top, #fff 0%, #fff 100%); padding: 20px; box-shadow: 0 10px 20px rgba(17, 17, 17, 0.125),
+0 5px 5px rgba(17, 17, 17, 0.25); width: 545px;">
+		<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" class="form-signin" role="form">
+			<h3 class="form-signin-heading">Sign up</h3>
+			<div class="form-group">
 				<div class="form-group">
-					<div class="">
-						<input type="text" name="email" th:field="*{email}" placeholder="Email" class="form-control" />
-						<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
-					</div>
+					<br>
+					<input type="text" name="email" th:field="*{email}" placeholder="Email" class="form-control" />
+					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Email Error</span>
 				</div>
-				<div class="form-group">
-					<div class="">
-						<input type="text" name="username" th:field="*{username}" placeholder="Userame" class="form-control" />
-						<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Email Error</span>
-					</div>
+			</div>
+			<div class="form-group">
+				<div class="">
+					<br>
+					<input type="text" name="username" th:field="*{username}" placeholder="Userame" class="form-control" />
+					<span th:if="${#fields.hasErrors('username')}"th:errors="*{username}" class="error" >Email Error</span>
 				</div>
-				<div class="form-group">
-					<div class="">
-						<input type="password" name="plainpassword" th:field="*{plainpassword}" placeholder="Password" class="form-control" />
-						<span th:if="${#fields.hasErrors('plainpassword')}" th:errors="*{plainpassword}">Email Error</span>
-					</div>
+			</div>
+			<div class="form-group">
+				<div class="">
+					<br>
+					<input type="password" name="plainpassword" th:field="*{plainpassword}" placeholder="Password" class="form-control" />
+					<ul>
+						<li th:each="err: ${#fields.errors('plainpassword')}" th:text="${err}" class="error" />
+						<li style="color:gray">8 or more characters</li>
+						<li style="color:gray">1 Uppercase character</li>
+						<li style="color:gray">1 Digit character</li>
+						<li style="color:gray">1 Special character</li>
+					</ul>
 				</div>
-				<div class="form-group">
-					<div class="">
-						<input type="password" name="repeatpassword" th:field="*{repeatpassword}" placeholder="Repeat Password" class="form-control" />
-						<span th:if="${#fields.hasErrors('repeatpassword')}" th:errors="*{repeatpassword}">Email Error</span>
-					</div>
+			</div>
+			<div class="form-group">
+				<div class="">
+					<br>
+					<input type="password" name="repeatpassword" th:field="*{repeatpassword}" placeholder="Repeat Password" class="form-control" />
+					<span th:if="${#fields.hasErrors('repeatpassword')}" th:errors="*{repeatpassword}" class="error">Email Error</span>
 				</div>
-				<div class="form-group">
-					<div class="">
-						<button type="submit" class="btn btn-primary btn-block">Register User</button>
-					</div>
+			</div>
+			<br>
+			<div class="form-group">
+				<div class="">
+					<br>
+					<button type="submit" class="btn">Register User</button>
 				</div>
-				<div class="alert alert-success alert-dismissible col-sm-12"
-					 th:if="${SuccessMessage!=null}">
-					<span>Registration Success!</span>
-					<a href="/login">Go to login</a>
-				</div>
-			</form>
-		</div>
+				<br>
+				<div class="texters" style="text-align: center; font-family: Arial; font-size: 14px;">Already have an account? <a href="/login">Login</a></div>
+			</div>
+			<div class="alert alert-success alert-dismissible col-sm-12"
+				 th:if="${SuccessMessage!=null}">
+				<span>Registration Success!</span>
+				<a href="/login">Go to login</a>
+			</div>
+		</form>
 	</div>
+</div>
 </body>
 </html>

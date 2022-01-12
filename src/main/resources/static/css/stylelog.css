@@ -1,0 +1,140 @@
+
+/*for loginarchie*/
+.input-box input{
+  height: 100vh;
+  width: 50px;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Poppins" , sans-seif;
+}
+
+.titlepo{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 25px;
+}
+
+.titlepo:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 25px;
+  background: #7d2ae8;
+}
+
+.container{
+width: 545px;
+box-shadow: 0 10px 20px rgba(17, 17, 17, 0.125),
+0 5px 5px rgba(17, 17, 17, 0.25);
+padding: 50px;
+position: static;
+height: 470px;
+background-image: linear-gradient(to top, #fff 0%, #fff 100%);
+}
+
+.texters a{
+text-decoration: none;
+font-family: Arial;
+font-size: 14px;
+font-weight: bold;
+color: #5A0061;
+}
+
+.texters a:hover{
+text-decoration: underline;
+}
+
+.texter1 a{
+text-decoration: none;
+font-family: Arial;
+font-size: 14px;
+font-weight: bold;
+color: #5A0061;
+}
+
+.texter1 a:hover{
+text-decoration: underline;
+}
+
+input[type="text"]{
+background: white;
+width: 495px;
+height: 50px;
+position: relative;
+left: -25px;
+font-size: 20px;
+font-weight: bold;
+}
+
+input[type="password"]{
+background: white;
+width: 495px;
+height: 50px;
+position: relative;
+left: -25px;
+font-size: 20px;
+}
+
+
+.container-fluid{
+border: 10px solid gray;
+max-width: 900px;
+margin: auto;
+height: 110vh;
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+right: 0;
+left: 0;
+top: 0;
+}
+
+input[type="text"]{
+font-family: Helvetica, sans-serif;
+font-size: 17px;
+}
+
+input[type="password"]{
+font-family: Arial;
+font-size: 17px;
+font-weight: normal;
+}
+
+.btn{
+background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  width: 100%;
+  font-family: Arial;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover{
+opacity: 0.5;
+}
+
+
+.pic{
+position: relative;
+padding: 30px;
+}
+
