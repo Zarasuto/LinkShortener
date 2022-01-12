@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class UrlShorteningServiceImpl implements UrlShorteningService{
@@ -22,7 +21,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             Url urlToPersist = new Url();
             urlToPersist.setShortenedURL(this.encodeUrl(url.getOriginalUrl()));
             urlToPersist.setOriginalUrl(validateAndFixUrl(url));
-            urlToPersist.setUser_id(url.getUser_id());
+            urlToPersist.setUserid(url.getUser_id());
             urlToPersist.setCreationDate(LocalDateTime.now());
             urlToPersist.setExpirationDate(setExpiryDate(url.getExpiryHours()));
             Url urlInRep = persistShortLink(urlToPersist);

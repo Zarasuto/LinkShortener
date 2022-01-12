@@ -2,7 +2,6 @@ package com.example.linkshortener.Controller;
 
 import com.example.linkshortener.Model.Url;
 import com.example.linkshortener.Model.UrlErrorResponse;
-import com.example.linkshortener.Security.CurrentAuthenticated;
 import com.example.linkshortener.Services.UrlLoggerServiceImpl;
 import com.example.linkshortener.Services.UrlShorteningServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,8 @@ public class RESTEndpoints {
             urlErrorResponse.setCode("200");
             return new ResponseEntity<UrlErrorResponse>(urlErrorResponse, HttpStatus.OK);
         }
-        if(urlToRedirect.getUser_id()!=1){
-            urlLoggerService.recordRedirectRequest(urlToRedirect.getId(),urlToRedirect.getUser_id());
+        if(urlToRedirect.getUserid()!=1){
+            urlLoggerService.recordRedirectRequest(urlToRedirect.getId(),urlToRedirect.getUserid());
         }
         response.sendRedirect(urlToRedirect.getOriginalUrl());
         return null;
