@@ -24,14 +24,14 @@ public class Url {
     private LocalDateTime expirationDate;
 
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userid;
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserid() {
+        return userid;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserid(Long user_id) {
+        this.userid = user_id;
     }
 
     public LocalDateTime getExpirationDate() {

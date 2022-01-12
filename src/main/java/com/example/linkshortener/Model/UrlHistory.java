@@ -12,17 +12,17 @@ public class UrlHistory {
     private Long id;
 
     @Column(name = "url_id")
-    private Long url_id;
+    private Long urlid;
 
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userid;
 
     @Column(name = "usage_date")
     private LocalDateTime usageDate;
 
-    public UrlHistory(Long url_id, Long user_id, LocalDateTime usageDate){
-        this.url_id=url_id;
-        this.user_id=user_id;
+    public UrlHistory(Long urlid, Long user_id, LocalDateTime usageDate){
+        this.urlid = urlid;
+        this.userid =user_id;
         this.usageDate=usageDate;
     }
 
@@ -38,20 +38,20 @@ public class UrlHistory {
         this.usageDate = usageDate;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserid() {
+        return userid;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserid(Long user_id) {
+        this.userid = user_id;
     }
 
-    public Long getUrl_id() {
-        return url_id;
+    public Long getUrlid() {
+        return urlid;
     }
 
-    public void setUrl_id(Long url_id) {
-        this.url_id = url_id;
+    public void setUrlid(Long url_id) {
+        this.urlid = url_id;
     }
 
     public Long getId() {
