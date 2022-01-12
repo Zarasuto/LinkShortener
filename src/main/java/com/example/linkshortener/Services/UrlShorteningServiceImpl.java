@@ -63,7 +63,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService{
             }
             temp1 = Math.floorDiv(temp, sampleSize);
             temp -= temp1 * sampleSize;
-            shortened[i] += sample[(i*LocalDateTime.now().getSecond())%61];
+            shortened[i] += sample[Math.abs((i*LocalDateTime.now().getNano())%61)];
         }
         String str= new String(shortened);
         return(str);

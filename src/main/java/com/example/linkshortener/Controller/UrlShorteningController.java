@@ -49,7 +49,17 @@ public class UrlShorteningController {
         }else{
             url.setUser_id(currentAuthenticated.getUserDetails().getId());
         }
-        model.addAttribute("urlData",url);
+        switch(url.getScope()){
+            case "day":
+                url.setExpiryHours(url.getExpiryHours()*24);
+                break;
+            case "week":
+                url.setExpiryHours(url.getExpiryHours()*168);
+                break;
+            case "month":
+                url.setExpiryHours(url.getExpiryHours()*672);
+                break;
+        }
         Url urlRep = urlShorteningService.generateShortLink(url);
         model.addAttribute("Url",urlRep);
         return "index";

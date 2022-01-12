@@ -38,6 +38,12 @@
         <label class="title1">Expiry</label>
         <br>
         <input class="expire" type="number" id="expiryHours" name="expiryHours" min="1" value="1">
+        <select name="scope" id="scope" style="width: 100px;height: 53px;">
+            <option value="hour">hour(s)</option>
+            <option value="day">day(s)</option>
+            <option value="week">week(s)</option>
+            <option value="month">month(s)</option>
+        </select>
         <br><br>
         <label>Short Link:</label>
         <p th:text="${Url?.getShortenedURL()}"/>
