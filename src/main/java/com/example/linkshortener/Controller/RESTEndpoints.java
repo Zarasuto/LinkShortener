@@ -35,7 +35,7 @@ public class RESTEndpoints {
         }
         if(urlToRedirect.getExpirationDate().isBefore(LocalDateTime.now())){
             UrlErrorResponse urlErrorResponse = new UrlErrorResponse();
-            urlErrorResponse.setError("Short link has expired");
+            urlErrorResponse.setError("Short link has expired create a new one");
             urlErrorResponse.setCode("200");
             return new ResponseEntity<UrlErrorResponse>(urlErrorResponse, HttpStatus.OK);
         }
