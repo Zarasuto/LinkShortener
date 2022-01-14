@@ -237,8 +237,8 @@
         .card .circle .box,
         .card .circle .box span{
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 70%;
+            left: 65%;
         }
 
         .card .circle .box span,
@@ -378,8 +378,7 @@
                 <div class="name" sec:authentication="principal.username"></div>
             </div>
             <ul class="links">
-                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> My Profile</a></li>
-                <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a></li>
+
                 <div class="divider"></div>
                 <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             </ul>
@@ -413,10 +412,11 @@
 
 
     <!-- HISTORY BUTTON CONTENT --> <!-- HISTORY BUTTON CONTENT --> <!-- HISTORY BUTTON CONTENT --> <!-- HISTORY BUTTON CONTENT -->
-        <a href='ile:///C:/Users/msi/Desktop/chart.htmlf'></a>
-        <button  class="pushable">
-            <span  class="front" style="font-weight: bold;">GO TO CHART</span>
-        </button>
+    <a href='/'>
+    <button class="pushable">
+        <span class="front" style="font-weight: bold;">GO TO SHORTENER</span>
+    </button>
+    </a>
 
     <div class="header">
         <h1>HISTORY</h1>
@@ -457,22 +457,24 @@
                 <div class="box"><span></span></div>
             </div>
             <div class="text">Total Clicks</div>
+            <div class="text" th:text="${UrlTotalClicks} +'/'+${TotalClicks}"></div>
         </div>
     </div>
 
 
 
         <!-- RADIAL PROGRESS BAR SCRIPT --><!-- RADIAL PROGRESS BAR SCRIPT --> <!-- RADIAL PROGRESS BAR SCRIPT --><!-- RADIAL PROGRESS BAR SCRIPT -->
-        <script>
+        <script th:inline="javascript">
+            var clicks=[[${UrlTotalClicks}]]/[[${TotalClicks}]];
             let options = {
                 startAngle: -1.55,
-                size: 150,
-                value: 0.85,
+                size: 220,
+                value: clicks,
                 fill: {gradient: ['#ffff', '#ffff']}
             }
             $(".circle .bar").circleProgress(options).on('circle-animation-progress',
                 function(event, progress, stepValue){
-                    $(this).parent().find("span").text(String(stepValue.toFixed(2).substr(2)) + "%");
+                    $(this).parent().find("span").text(String((stepValue/10).toFixed(3).substr(2)) + "%");
                 });
             $(".js .bar").circleProgress({
                 value: 0.70

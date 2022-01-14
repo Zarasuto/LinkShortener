@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -43,6 +42,8 @@ public class UserHomepageController {
         model.addAttribute("urls",urlList);
         model.addAttribute("urlDta",new Url());
         model.addAttribute("Timeformat",dTF);
+        model.addAttribute("UrlTotalClicks",0);
+        model.addAttribute("TotalClicks",urlHistoryRepository.countAllByUserid(currentAuthenticated.getUserDetails().getId()));
         return "/user/home";
     }
     @GetMapping("/user/home/{shortenedLink}")
@@ -51,11 +52,12 @@ public class UserHomepageController {
             return "redirect:/";
         }
         Url url = urlRepository.findByshortenedURL(shortenedLink);
+        model.addAttribute("UrlTotalClicks",0);
+        model.addAttribute("TotalClicks",urlHistoryRepository.countAllByUserid(currentAuthenticated.getUserDetails().getId()));
         if(url!=null){
             model.addAttribute("UrlTotalClicks",urlHistoryRepository.countByUrlid(url.getId()));
             model.addAttribute("urlDta",url);
         }
-        model.addAttribute("UrlTotalClicks",0);
         List<Url> urlList =  userService.loadUrls(currentAuthenticated.getUserDetails().getId());
         model.addAttribute("urls",urlList);
         model.addAttribute("Timeformat",dTF);
