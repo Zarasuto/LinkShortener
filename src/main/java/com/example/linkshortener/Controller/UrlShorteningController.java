@@ -45,7 +45,7 @@ public class UrlShorteningController {
         }
         //Checks if the user is either logged in or not. if yes, add a url based on that user
         if(currentAuthenticated.getAuthentication()==null){
-            url.setUser_id(1);
+            url.setUser_id(0);
         }else{
             url.setUser_id(currentAuthenticated.getUserDetails().getId());
         }

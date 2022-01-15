@@ -39,7 +39,7 @@ public class RESTEndpoints {
             urlErrorResponse.setCode("200");
             return new ResponseEntity<UrlErrorResponse>(urlErrorResponse, HttpStatus.OK);
         }
-        if(urlToRedirect.getUserid()!=1){
+        if(urlToRedirect.getUserid()!=0){
             urlLoggerService.recordRedirectRequest(urlToRedirect.getId(),urlToRedirect.getUserid());
         }
         response.sendRedirect(urlToRedirect.getOriginalUrl());
