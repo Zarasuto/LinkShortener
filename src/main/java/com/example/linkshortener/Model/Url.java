@@ -11,10 +11,10 @@ public class Url {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "original_url")
+    @Column(name = "original_url",length = 200)
     private String originalUrl;
 
-    @Column(name = "shortened_url")
+    @Column(name = "shortened_url", unique = true)
     private String shortenedURL;
 
     @Column(name = "creation_date")
